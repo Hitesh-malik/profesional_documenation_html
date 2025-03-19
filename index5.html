@@ -1,0 +1,2079 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechDocs | Professional Documentation Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3a0ca3;
+            --accent-color: #4cc9f0;
+            --dark-bg: #0f172a;
+            --darker-bg: #0a0f1d;
+            --card-bg: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --border-color: rgba(148, 163, 184, 0.1);
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --info-color: #3b82f6;
+            --transition: all 0.3s ease;
+
+            /* Spacing variables for responsive design */
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 1.5rem;
+            --spacing-lg: 2rem;
+            --spacing-xl: 3rem;
+            --spacing-xxl: 4rem;
+
+            /* Border radius */
+            --radius-sm: 0.25rem;
+            --radius-md: 0.375rem;
+            --radius-lg: 0.5rem;
+            --radius-xl: 0.75rem;
+            --radius-full: 9999px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+            height: 100%;
+        }
+
+        /* Responsive font sizing */
+        @media (max-width: 1400px) {
+            html {
+                font-size: 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            html {
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            html {
+                font-size: 13px;
+            }
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100%;
+            display: flex;
+            flex-direction: column;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: var(--transition);
+            outline: none;
+        }
+
+        a:hover,
+        a:focus {
+            color: var(--primary-color);
+        }
+
+        a:focus-visible {
+            outline: 2px solid var(--primary-color);
+            outline-offset: 2px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        input,
+        button,
+        textarea,
+        select {
+            font: inherit;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: 2px solid var(--accent-color);
+            outline-offset: 0;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        /* Focus styles for accessibility */
+        button:focus-visible {
+            outline: 2px solid var(--accent-color);
+            outline-offset: 2px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-lg);
+        }
+
+        @media (max-width: 1400px) {
+            .container {
+                max-width: 1140px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .container {
+                max-width: 960px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 var(--spacing-md);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 var(--spacing-sm);
+            }
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+        }
+
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 1.75rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .section-title::after {
+                width: 40px;
+                height: 2px;
+            }
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 700;
+        }
+
+        /* Responsive buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.625rem 1.25rem;
+            font-weight: 500;
+            border-radius: var(--radius-md);
+            transition: var(--transition);
+            cursor: pointer;
+            white-space: nowrap;
+            line-height: 1.5;
+            font-size: 1rem;
+            text-align: center;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+
+        @media (hover: hover) {
+            .btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.875rem;
+            }
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover,
+        .btn-primary:focus {
+            box-shadow: 0 4px 12px rgba(67, 97, 238, 0.3);
+            color: white;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .btn-outline:hover,
+        .btn-outline:focus {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-sm {
+            padding: 0.375rem 0.75rem;
+            font-size: 0.875rem;
+        }
+
+        .btn-lg {
+            padding: 0.75rem 1.5rem;
+            font-size: 1.125rem;
+        }
+
+        .btn-block {
+            display: flex;
+            width: 100%;
+        }
+
+        /* Responsive cards */
+        .card {
+            background-color: var(--card-bg);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+            height: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .card:hover {
+                transform: translateY(-3px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                border-radius: var(--radius-md);
+            }
+
+            .card:hover {
+                transform: none;
+            }
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.25rem 0.625rem;
+            border-radius: var(--radius-full);
+            font-size: 0.75rem;
+            font-weight: 500;
+            line-height: 1.25;
+            white-space: nowrap;
+            text-decoration: none;
+        }
+
+        @media (max-width: 480px) {
+            .badge {
+                padding: 0.2rem 0.5rem;
+                font-size: 0.7rem;
+            }
+        }
+
+        .badge-primary {
+            background-color: rgba(67, 97, 238, 0.15);
+            color: var(--primary-color);
+        }
+
+        .badge-secondary {
+            background-color: rgba(58, 12, 163, 0.15);
+            color: var(--secondary-color);
+        }
+
+        .badge-accent {
+            background-color: rgba(76, 201, 240, 0.15);
+            color: var(--accent-color);
+        }
+
+        .badge-success {
+            background-color: rgba(16, 185, 129, 0.15);
+            color: var(--success-color);
+        }
+
+        .badge-warning {
+            background-color: rgba(245, 158, 11, 0.15);
+            color: var(--warning-color);
+        }
+
+        .badge-info {
+            background-color: rgba(59, 130, 246, 0.15);
+            color: var(--info-color);
+        }
+
+        /* Mobile menu styles */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: var(--radius-md);
+            transition: var(--transition);
+        }
+
+        .mobile-menu-toggle:hover,
+        .mobile-menu-toggle:focus {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        @media (max-width: 992px) {
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .desktop-menu {
+                display: none;
+            }
+        }
+
+        /* Grid system */
+        .grid {
+            display: grid;
+            gap: var(--spacing-lg);
+        }
+
+        .grid-2 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .grid-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .grid-4 {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        @media (max-width: 1200px) {
+            .grid-4 {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 992px) {
+
+            .grid-3,
+            .grid-4 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .grid {
+                gap: var(--spacing-md);
+            }
+        }
+
+        @media (max-width: 576px) {
+
+            .grid-2,
+            .grid-3,
+            .grid-4 {
+                grid-template-columns: 1fr;
+            }
+
+            .grid {
+                gap: var(--spacing-sm);
+            }
+        }
+
+        /* Flex utilities */
+        .flex {
+            display: flex;
+        }
+
+        .flex-wrap {
+            flex-wrap: wrap;
+        }
+
+        .items-center {
+            align-items: center;
+        }
+
+        .justify-between {
+            justify-content: space-between;
+        }
+
+        .justify-center {
+            justify-content: center;
+        }
+
+        .justify-end {
+            justify-content: flex-end;
+        }
+
+        .flex-col {
+            flex-direction: column;
+        }
+
+        .gap-xs {
+            gap: var(--spacing-xs);
+        }
+
+        .gap-sm {
+            gap: var(--spacing-sm);
+        }
+
+        .gap-md {
+            gap: var(--spacing-md);
+        }
+
+        .gap-lg {
+            gap: var(--spacing-lg);
+        }
+
+        @media (max-width: 992px) {
+            .lg-flex-col {
+                flex-direction: column;
+            }
+
+            .lg-items-start {
+                align-items: flex-start;
+            }
+
+            .lg-gap-y {
+                gap: var(--spacing-md) 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .md-flex-col {
+                flex-direction: column;
+            }
+
+            .md-items-start {
+                align-items: flex-start;
+            }
+
+            .md-gap-y {
+                gap: var(--spacing-md) 0;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .sm-flex-col {
+                flex-direction: column;
+            }
+
+            .sm-items-center {
+                align-items: center;
+            }
+
+            .sm-text-center {
+                text-align: center;
+            }
+        }
+
+        /* Spacing utilities */
+        .m-0 {
+            margin: 0;
+        }
+
+        .my-xs {
+            margin-top: var(--spacing-xs);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .my-sm {
+            margin-top: var(--spacing-sm);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .my-md {
+            margin-top: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .my-lg {
+            margin-top: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .mx-auto {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .mt-0 {
+            margin-top: 0;
+        }
+
+        .mt-xs {
+            margin-top: var(--spacing-xs);
+        }
+
+        .mt-sm {
+            margin-top: var(--spacing-sm);
+        }
+
+        .mt-md {
+            margin-top: var(--spacing-md);
+        }
+
+        .mt-lg {
+            margin-top: var(--spacing-lg);
+        }
+
+        .mb-0 {
+            margin-bottom: 0;
+        }
+
+        .mb-xs {
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .mb-sm {
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .mb-md {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .mb-lg {
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .p-0 {
+            padding: 0;
+        }
+
+        .p-xs {
+            padding: var(--spacing-xs);
+        }
+
+        .p-sm {
+            padding: var(--spacing-sm);
+        }
+
+        .p-md {
+            padding: var(--spacing-md);
+        }
+
+        .p-lg {
+            padding: var(--spacing-lg);
+        }
+
+        .py-xs {
+            padding-top: var(--spacing-xs);
+            padding-bottom: var(--spacing-xs);
+        }
+
+        .py-sm {
+            padding-top: var(--spacing-sm);
+            padding-bottom: var(--spacing-sm);
+        }
+
+        .py-md {
+            padding-top: var(--spacing-md);
+            padding-bottom: var(--spacing-md);
+        }
+
+        .py-lg {
+            padding-top: var(--spacing-lg);
+            padding-bottom: var(--spacing-lg);
+        }
+
+        .px-xs {
+            padding-left: var(--spacing-xs);
+            padding-right: var(--spacing-xs);
+        }
+
+        .px-sm {
+            padding-left: var(--spacing-sm);
+            padding-right: var(--spacing-sm);
+        }
+
+        .px-md {
+            padding-left: var(--spacing-md);
+            padding-right: var(--spacing-md);
+        }
+
+        .px-lg {
+            padding-left: var(--spacing-lg);
+            padding-right: var(--spacing-lg);
+        }
+
+        /* Typography utilities */
+        .text-xs {
+            font-size: 0.75rem;
+        }
+
+        .text-sm {
+            font-size: 0.875rem;
+        }
+
+        .text-base {
+            font-size: 1rem;
+        }
+
+        .text-lg {
+            font-size: 1.125rem;
+        }
+
+        .text-xl {
+            font-size: 1.25rem;
+        }
+
+        .text-2xl {
+            font-size: 1.5rem;
+        }
+
+        .text-3xl {
+            font-size: 1.875rem;
+        }
+
+        .text-4xl {
+            font-size: 2.25rem;
+        }
+
+        .font-normal {
+            font-weight: 400;
+        }
+
+        .font-medium {
+            font-weight: 500;
+        }
+
+        .font-semibold {
+            font-weight: 600;
+        }
+
+        .font-bold {
+            font-weight: 700;
+        }
+
+        .font-extrabold {
+            font-weight: 800;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .text-left {
+            text-align: left;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .text-primary {
+            color: var(--text-primary);
+        }
+
+        .text-secondary {
+            color: var(--text-secondary);
+        }
+
+        .text-accent {
+            color: var(--accent-color);
+        }
+
+        .text-success {
+            color: var(--success-color);
+        }
+
+        .text-warning {
+            color: var(--warning-color);
+        }
+
+        .text-info {
+            color: var(--info-color);
+        }
+
+        /* Background utilities */
+        .bg-dark {
+            background-color: var(--dark-bg);
+        }
+
+        .bg-darker {
+            background-color: var(--darker-bg);
+        }
+
+        .bg-card {
+            background-color: var(--card-bg);
+        }
+
+        /* Border utilities */
+        .border {
+            border: 1px solid var(--border-color);
+        }
+
+        .border-t {
+            border-top: 1px solid var(--border-color);
+        }
+
+        .border-b {
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .border-l {
+            border-left: 1px solid var(--border-color);
+        }
+
+        .border-r {
+            border-right: 1px solid var(--border-color);
+        }
+
+        .rounded-none {
+            border-radius: 0;
+        }
+
+        .rounded-sm {
+            border-radius: var(--radius-sm);
+        }
+
+        .rounded-md {
+            border-radius: var(--radius-md);
+        }
+
+        .rounded-lg {
+            border-radius: var(--radius-lg);
+        }
+
+        .rounded-xl {
+            border-radius: var(--radius-xl);
+        }
+
+        .rounded-full {
+            border-radius: var(--radius-full);
+        }
+
+        /* Shadow utilities */
+        .shadow-sm {
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+
+        .shadow-md {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .shadow-lg {
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .shadow-xl {
+            box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Responsive visibility */
+        .hidden-xl {
+            display: initial;
+        }
+
+        .hidden-lg {
+            display: initial;
+        }
+
+        .hidden-md {
+            display: initial;
+        }
+
+        .hidden-sm {
+            display: initial;
+        }
+
+        @media (max-width: 1200px) {
+            .hidden-xl {
+                display: none !important;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .hidden-lg {
+                display: none !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hidden-md {
+                display: none !important;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hidden-sm {
+                display: none !important;
+            }
+        }
+
+        .visible-xl {
+            display: none;
+        }
+
+        .visible-lg {
+            display: none;
+        }
+
+        .visible-md {
+            display: none;
+        }
+
+        .visible-sm {
+            display: none;
+        }
+
+        @media (max-width: 1200px) {
+            .visible-xl {
+                display: initial;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .visible-lg {
+                display: initial;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .visible-md {
+                display: initial;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .visible-sm {
+                display: initial;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .slide-up {
+            animation: slideUp 0.5s ease-in-out;
+        }
+
+        /* Utility classes for common patterns */
+        .avatar {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: white;
+        }
+
+        .avatar-sm {
+            width: 2rem;
+            height: 2rem;
+            font-size: 0.875rem;
+        }
+
+        .avatar-lg {
+            width: 3rem;
+            height: 3rem;
+            font-size: 1.25rem;
+        }
+
+        .backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            display: none;
+        }
+
+        .backdrop.active {
+            display: block;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        /* Accessibility focus visible */
+        .focus-visible:focus-visible {
+            outline: 2px solid var(--accent-color);
+            outline-offset: 2px;
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                background-color: white;
+                color: black;
+            }
+
+            .container {
+                max-width: none;
+                padding: 0;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+        }
+
+
+        .badge-accent {
+            background-color: rgba(76, 201, 240, 0.15);
+            color: var(--accent-color);
+        }
+
+        .badge-success {
+            background-color: rgba(16, 185, 129, 0.15);
+            color: var(--success-color);
+        }
+
+        .badge-warning {
+            background-color: rgba(245, 158, 11, 0.15);
+            color: var(--warning-color);
+        }
+
+        .badge-info {
+            background-color: rgba(59, 130, 246, 0.15);
+            color: var(--info-color);
+        }
+
+        /* Mobile menu styles */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .desktop-menu {
+                display: none;
+            }
+        }
+
+        /* Grid system */
+        .grid {
+            display: grid;
+            gap: var(--spacing-lg);
+        }
+
+        .grid-2 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .grid-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .grid-4 {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        @media (max-width: 1024px) {
+            .grid-4 {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+
+            .grid-3,
+            .grid-4 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .grid {
+                gap: var(--spacing-md);
+            }
+        }
+
+        @media (max-width: 480px) {
+
+            .grid-2,
+            .grid-3,
+            .grid-4 {
+                grid-template-columns: 1fr;
+            }
+
+            .grid {
+                gap: var(--spacing-sm);
+            }
+        }
+
+        /* Flex utilities */
+        .flex {
+            display: flex;
+        }
+
+        .flex-wrap {
+            flex-wrap: wrap;
+        }
+
+        .items-center {
+            align-items: center;
+        }
+
+        .justify-between {
+            justify-content: space-between;
+        }
+
+        .justify-center {
+            justify-content: center;
+        }
+
+        .flex-col {
+            flex-direction: column;
+        }
+
+        @media (max-width: 768px) {
+            .md-flex-col {
+                flex-direction: column;
+            }
+
+            .md-items-start {
+                align-items: flex-start;
+            }
+
+            .md-gap-y {
+                gap: var(--spacing-md) 0;
+            }
+        }
+
+        /* Spacing utilities */
+        .gap-sm {
+            gap: var(--spacing-sm);
+        }
+
+        .gap-md {
+            gap: var(--spacing-md);
+        }
+
+        .gap-lg {
+            gap: var(--spacing-lg);
+        }
+
+        .my-sm {
+            margin-top: var(--spacing-sm);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .my-md {
+            margin-top: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .my-lg {
+            margin-top: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .mt-sm {
+            margin-top: var(--spacing-sm);
+        }
+
+        .mt-md {
+            margin-top: var(--spacing-md);
+        }
+
+        .mt-lg {
+            margin-top: var(--spacing-lg);
+        }
+
+        .mb-sm {
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .mb-md {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .mb-lg {
+            margin-bottom: var(--spacing-lg);
+        }
+
+        /* Responsive visibility */
+        .hidden-sm {
+            display: initial;
+        }
+
+        @media (max-width: 768px) {
+            .hidden-md {
+                display: none !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hidden-sm {
+                display: none !important;
+            }
+        }
+
+        .visible-md {
+            display: none;
+        }
+
+        .visible-sm {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .visible-md {
+                display: initial;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .visible-sm {
+                display: initial;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header Section -->
+    <header
+        style="background-color: var(--darker-bg); padding: 1.25rem 0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); border-bottom: 1px solid var(--border-color);">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="logo" style="display: flex; align-items: center;">
+                <span style="font-size: 1.5rem; margin-right: 0.625rem;">
+                    <i class="fas fa-book" style="color: var(--primary-color);"></i>
+                </span>
+                <h1 style="font-size: 1.5rem; font-weight: 700;">Tech<span class="gradient-text">Docs</span></h1>
+            </div>
+
+            <!-- Mobile menu toggle button -->
+            <button class="mobile-menu-toggle focus-visible" aria-label="Toggle Menu" aria-expanded="false"
+                aria-controls="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <!-- Desktop Navigation -->
+            <nav class="desktop-menu hidden-lg">
+                <ul style="display: flex; list-style: none; gap: 2rem;">
+                    <li><a href="#" class="focus-visible"
+                            style="font-weight: 500; color: var(--text-primary); position: relative; padding: 0.5rem 0;">Home</a>
+                    </li>
+                    <li><a href="http://docs.telusko.com" class="focus-visible"
+                            style="font-weight: 500; color: var(--text-primary); position: relative; padding: 0.5rem 0;">Documentation</a>
+                    </li>
+                    <li><a href="https://courses.telusko.com/learn/view-all?show=courses&type=1" class="focus-visible"
+                            style="font-weight: 500; color: var(--text-primary); position: relative; padding: 0.5rem 0;">Tutorials</a>
+                    </li>
+                    <li><a href="#" class="focus-visible"
+                            style="font-weight: 500; color: var(--text-primary); position: relative; padding: 0.5rem 0;">Community</a>
+                    </li>
+                    <li><a href="#" class="focus-visible"
+                            style="font-weight: 500; color: var(--text-primary); position: relative; padding: 0.5rem 0;">Enterprise</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="auth-buttons hidden-lg">
+                <button class="btn btn-outline focus-visible" style="margin-right: 0.625rem;">Sign In</button>
+                <button class="btn btn-primary focus-visible">Get Started</button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu (hidden by default) -->
+        <div id="mobile-menu"
+            style="display: none; background-color: var(--darker-bg); padding: 1rem 0; border-top: 1px solid var(--border-color);">
+            <div class="container">
+                <nav>
+                    <ul style="list-style: none; margin: 0; padding: 0;">
+                        <li style="margin-bottom: 1rem;"><a href="#" class="focus-visible"
+                                style="font-weight: 500; color: var(--text-primary); display: block; padding: 0.75rem 0; border-radius: var(--radius-md); transition: var(--transition);">Home</a>
+                        </li>
+                        <li style="margin-bottom: 1rem;"><a href="http://docs.telusko.com" class="focus-visible"
+                                style="font-weight: 500; color: var(--text-primary); display: block; padding: 0.75rem 0; border-radius: var(--radius-md); transition: var(--transition);">Documentation</a>
+                        </li>
+                        <li style="margin-bottom: 1rem;"><a
+                                href="https://courses.telusko.com/learn/view-all?show=courses&type=1"
+                                class="focus-visible"
+                                style="font-weight: 500; color: var(--text-primary); display: block; padding: 0.75rem 0; border-radius: var(--radius-md); transition: var(--transition);">Tutorials</a>
+                        </li>
+                        <li style="margin-bottom: 1rem;"><a href="#" class="focus-visible"
+                                style="font-weight: 500; color: var(--text-primary); display: block; padding: 0.75rem 0; border-radius: var(--radius-md); transition: var(--transition);">Community</a>
+                        </li>
+                        <li style="margin-bottom: 1rem;"><a href="#" class="focus-visible"
+                                style="font-weight: 500; color: var(--text-primary); display: block; padding: 0.75rem 0; border-radius: var(--radius-md); transition: var(--transition);">Enterprise</a>
+                        </li>
+                    </ul>
+                    <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+                        <button class="btn btn-outline focus-visible" style="flex: 1;">Sign In</button>
+                        <button class="btn btn-primary focus-visible" style="flex: 1;">Get Started</button>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header> 
+
+    <!-- Hero Section -->
+    <section
+        style="padding: 5rem 0 4rem; background: linear-gradient(to bottom, var(--darker-bg), var(--dark-bg)); position: relative; overflow: hidden;">
+        <div class="container" style="position: relative; z-index: 1;">
+            <div style="max-width: 650px;">
+                <h1
+                    style="font-size: clamp(2rem, 5vw, 3rem); line-height: 1.2; margin-bottom: 1.5rem; font-weight: 800;">
+                    Professional <span class="gradient-text">Documentation</span> for Modern Developers
+                </h1>
+                <p
+                    style="font-size: clamp(1rem, 2vw, 1.125rem); color: var(--text-secondary); margin-bottom: 2.5rem; max-width: 540px;">
+                    Comprehensive, well-structured documentation for all your technical needs. Built by developers, for
+                    developers.
+                </p>
+                <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 3rem;">
+                    <button class="btn btn-primary" style="padding: 0.75rem 1.5rem; font-size: 1rem;">
+                        Browse Documentation
+                    </button>
+                    <button class="btn btn-outline" style="padding: 0.75rem 1.5rem; font-size: 1rem;">
+                        <i class="fas fa-play" style="font-size: 0.75rem;"></i> Watch Tutorial
+                    </button>
+                </div>
+                <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 1.5rem;">
+                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                        <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
+                        <span style="color: var(--text-secondary); font-size: 0.875rem;">Up-to-date Content</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                        <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
+                        <span style="color: var(--text-secondary); font-size: 0.875rem;">Enterprise Support</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                        <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
+                        <span style="color: var(--text-secondary); font-size: 0.875rem;">Active Community</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Decorative elements - responsive sizing -->
+        <div
+            style="position: absolute; top: 20%; right: 5%; width: min(400px, 50vw); height: min(400px, 50vw); background: radial-gradient(circle, rgba(67, 97, 238, 0.1) 0%, rgba(67, 97, 238, 0) 70%); border-radius: 50%; z-index: 0; animation: pulse 8s infinite alternate ease-in-out;">
+        </div>
+        <div
+            style="position: absolute; bottom: 10%; left: 15%; width: min(300px, 40vw); height: min(300px, 40vw); background: radial-gradient(circle, rgba(76, 201, 240, 0.1) 0%, rgba(76, 201, 240, 0) 70%); border-radius: 50%; z-index: 0; animation: pulse 8s infinite alternate-reverse ease-in-out;">
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <section style=" padding: 0 0 4rem; margin-top: -2rem;">
+        <div class="container">
+            <div class="card"
+                style="max-width: 800px; margin: 0 auto; padding: 2rem; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);">
+                <h3 style="font-size: 1.25rem; margin-bottom: 1.5rem; text-align: center;">Find Documentation</h3>
+                <div style="display: flex; gap: 0.5rem;">
+                    <input type="text" placeholder="Search for tutorials, guides, and references..."
+                        style="flex: 1; padding: 0.875rem 1.25rem; border-radius: 0.375rem; border: 1px solid var(--border-color); background-color: var(--dark-bg); color: var(--text-primary); outline: none; font-size: 0.875rem;">
+                    <button class="btn btn-primary" style="white-space: nowrap;">
+                        <i class="fas fa-search"></i> Search
+                    </button>
+                </div>
+                <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 1.5rem;">
+                    <span class="badge badge-primary" style="cursor: pointer;">Python</span>
+                    <span class="badge badge-secondary" style="cursor: pointer;">JavaScript</span>
+                    <span class="badge badge-accent" style="cursor: pointer;">Data Science</span>
+                    <span class="badge badge-info" style="cursor: pointer;">DevOps</span>
+                    <span class="badge badge-success" style="cursor: pointer;">Cloud</span>
+                    <span class="badge badge-warning" style="cursor: pointer;">Web Development</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Documentation Categories Section -->
+    <section style="padding: 4rem 0; background-color: var(--darker-bg);">
+        <div class="container">
+            <h2 class="section-title" style="margin-bottom: 3rem; text-align: center;">
+                Documentation Categories
+            </h2>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem;">
+                <!-- Category Card 1 -->
+                <div class="card" style="padding: 2rem;">
+                    <div style="margin-bottom: 1.5rem; font-size: 1.75rem; color: var(--primary-color);">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3 style="margin-bottom: 1rem; font-size: 1.25rem; font-weight: 600;">Python Development</h3>
+                    <p
+                        style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 0.875rem; line-height: 1.5;">
+                        Comprehensive guides on Python programming, libraries, frameworks, and best practices for
+                        developers of all levels.
+                    </p>
+                    <a href="#"
+                        style="display: flex; align-items: center; gap: 0.5rem; font-weight: 500; font-size: 0.875rem;">
+                        Explore Documentation <i class="fas fa-arrow-right" style="font-size: 0.75rem;"></i>
+                    </a>
+                </div>
+
+                <!-- Category Card 2 -->
+                <div class="card" style="padding: 2rem;">
+                    <div style="margin-bottom: 1.5rem; font-size: 1.75rem; color: var(--secondary-color);">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3 style="margin-bottom: 1rem; font-size: 1.25rem; font-weight: 600;">Web Development</h3>
+                    <p
+                        style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 0.875rem; line-height: 1.5;">
+                        Resources for frontend and backend technologies, including JavaScript, React, Angular, Vue,
+                        Node.js, and more.
+                    </p>
+                    <a href="#"
+                        style="display: flex; align-items: center; gap: 0.5rem; font-weight: 500; font-size: 0.875rem;">
+                        Explore Documentation <i class="fas fa-arrow-right" style="font-size: 0.75rem;"></i>
+                    </a>
+                </div>
+
+                <!-- Category Card 3 -->
+                <div class="card" style="padding: 2rem;">
+                    <div style="margin-bottom: 1.5rem; font-size: 1.75rem; color: var(--accent-color);">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3 style="margin-bottom: 1rem; font-size: 1.25rem; font-weight: 600;">Data Science & AI</h3>
+                    <p
+                        style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 0.875rem; line-height: 1.5;">
+                        Explore machine learning, data visualization, statistical analysis, and artificial intelligence
+                        concepts.
+                    </p>
+                    <a href="#"
+                        style="display: flex; align-items: center; gap: 0.5rem; font-weight: 500; font-size: 0.875rem;">
+                        Explore Documentation <i class="fas fa-arrow-right" style="font-size: 0.75rem;"></i>
+                    </a>
+                </div>
+
+                <!-- Category Card 4 -->
+                <div class="card" style="padding: 2rem;">
+                    <div style="margin-bottom: 1.5rem; font-size: 1.75rem; color: var(--info-color);">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h3 style="margin-bottom: 1rem; font-size: 1.25rem; font-weight: 600;">Cloud & DevOps</h3>
+                    <p
+                        style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 0.875rem; line-height: 1.5;">
+                        Learn about cloud services, infrastructure as code, CI/CD pipelines, containerization, and
+                        orchestration.
+                    </p>
+                    <a href="#"
+                        style="display: flex; align-items: center; gap: 0.5rem; font-weight: 500; font-size: 0.875rem;">
+                        Explore Documentation <i class="fas fa-arrow-right" style="font-size: 0.75rem;"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Documentation Section -->
+    <section style="padding: 4rem 0;">
+        <div class="container">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem;">
+                <h2 class="section-title">Featured Documentation</h2>
+                <a href="#"
+                    style="font-weight: 500; font-size: 0.875rem; display: flex; align-items: center; gap: 0.5rem;">
+                    View All <i class="fas fa-arrow-right" style="font-size: 0.75rem;"></i>
+                </a>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 2rem;">
+                <!-- Doc Item 1 -->
+                <div class="card">
+                    <div
+                        style="height: 8px; background: linear-gradient(90deg, var(--primary-color), var(--accent-color));">
+                    </div>
+                    <div style="padding: 1.5rem;">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <div style="display: flex; gap: 0.5rem;">
+                                <span class="badge badge-primary">Python</span>
+                                <span class="badge badge-success">Updated</span>
+                            </div>
+                            <span style="color: var(--text-secondary); font-size: 0.75rem;">
+                                <i class="fas fa-clock"></i> 5 days ago
+                            </span>
+                        </div>
+                        <h3 style="font-size: 1.25rem; margin-bottom: 1rem; font-weight: 600;">Python Advanced Patterns
+                        </h3>
+                        <p
+                            style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 0.875rem; line-height: 1.6;">
+                            Discover advanced design patterns, optimization techniques, and best practices for
+                            large-scale Python applications.
+                        </p>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <a href="#" class="btn btn-outline" style="font-size: 0.75rem; padding: 0.5rem 0.75rem;">
+                                Read Documentation
+                            </a>
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span
+                                    style="color: var(--text-secondary); font-size: 0.75rem; display: flex; align-items: center; gap: 0.25rem;">
+                                    <i class="fas fa-eye"></i> 8.2k
+                                </span>
+                                <span
+                                    style="color: var(--text-secondary); font-size: 0.75rem; display: flex; align-items: center; gap: 0.25rem;">
+                                    <i class="fas fa-star"></i> 4.9
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Doc Item 2 -->
+                <div class="card">
+                    <div
+                        style="height: 8px; background: linear-gradient(90deg, var(--info-color), var(--success-color));">
+                    </div>
+                    <div style="padding: 1.5rem;">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <div style="display: flex; gap: 0.5rem;">
+                                <span class="badge badge-info">React</span>
+                                <span class="badge badge-warning">Popular</span>
+                            </div>
+                            <span style="color: var(--text-secondary); font-size: 0.75rem;">
+                                <i class="fas fa-clock"></i> 2 weeks ago
+                            </span>
+                        </div>
+                        <h3 style="font-size: 1.25rem; margin-bottom: 1rem; font-weight: 600;">React Performance
+                            Optimization</h3>
+                        <p
+                            style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 0.875rem; line-height: 1.6;">
+                            Learn techniques to optimize React applications, including memoization, virtualization, and
+                            code splitting.
+                        </p>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <a href="#" class="btn btn-outline" style="font-size: 0.75rem; padding: 0.5rem 0.75rem;">
+                                Read Documentation
+                            </a>
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span
+                                    style="color: var(--text-secondary); font-size: 0.75rem; display: flex; align-items: center; gap: 0.25rem;">
+                                    <i class="fas fa-eye"></i> 12.5k
+                                </span>
+                                <span
+                                    style="color: var(--text-secondary); font-size: 0.75rem; display: flex; align-items: center; gap: 0.25rem;">
+                                    <i class="fas fa-star"></i> 4.8
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Doc Item 3 -->
+                <div class="card">
+                    <div
+                        style="height: 8px; background: linear-gradient(90deg, var(--warning-color), var(--secondary-color));">
+                    </div>
+                    <div style="padding: 1.5rem;">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <div style="display: flex; gap: 0.5rem;">
+                                <span class="badge badge-warning">TensorFlow</span>
+                                <span class="badge badge-accent">New</span>
+                            </div>
+                            <span style="color: var(--text-secondary); font-size: 0.75rem;">
+                                <i class="fas fa-clock"></i> 3 days ago
+                            </span>
+                        </div>
+                        <h3 style="font-size: 1.25rem; margin-bottom: 1rem; font-weight: 600;">Deep Learning for
+                            Computer Vision</h3>
+                        <p
+                            style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 0.875rem; line-height: 1.6;">
+                            Comprehensive guide to building and deploying computer vision models using TensorFlow and
+                            Keras.
+                        </p>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <a href="#" class="btn btn-outline" style="font-size: 0.75rem; padding: 0.5rem 0.75rem;">
+                                Read Documentation
+                            </a>
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span
+                                    style="color: var(--text-secondary); font-size: 0.75rem; display: flex; align-items: center; gap: 0.25rem;">
+                                    <i class="fas fa-eye"></i> 6.7k
+                                </span>
+                                <span
+                                    style="color: var(--text-secondary); font-size: 0.75rem; display: flex; align-items: center; gap: 0.25rem;">
+                                    <i class="fas fa-star"></i> 4.7
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- For Enterprise Section -->
+    <section style="padding: 4rem 0; background-color: var(--darker-bg);">
+        <div class="container">
+            <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 4rem;">
+                <div style="flex: 1; min-width: 300px;">
+                    <h2 class="section-title" style="margin-bottom: 1.5rem;">Enterprise Solutions</h2>
+                    <p style="color: var(--text-secondary); margin-bottom: 2rem; font-size: 1rem; line-height: 1.6;">
+                        Tailored documentation experiences for your organization. Get premium support, custom
+                        integrations, and advanced security features.
+                    </p>
+                    <ul style="list-style: none; margin-bottom: 2rem;">
+                        <li style="margin-bottom: 1rem; display: flex; align-items: flex-start; gap: 0.75rem;">
+                            <i class="fas fa-check" style="color: var(--success-color); margin-top: 0.25rem;"></i>
+                            <span style="color: var(--text-secondary); font-size: 0.875rem;">
+                                <strong
+                                    style="color: var(--text-primary); display: block; margin-bottom: 0.25rem;">Private
+                                    Documentation</strong>
+                                Secure, access-controlled documentation for your internal teams.
+                            </span>
+                        </li>
+                        <li style="margin-bottom: 1rem; display: flex; align-items: flex-start; gap: 0.75rem;">
+                            <i class="fas fa-check" style="color: var(--success-color); margin-top: 0.25rem;"></i>
+                            <span style="color: var(--text-secondary); font-size: 0.875rem;">
+                                <strong
+                                    style="color: var(--text-primary); display: block; margin-bottom: 0.25rem;">Custom
+                                    Branding</strong>
+                                Tailored documentation that reflects your organization's identity.
+                            </span>
+                        </li>
+                        <li style="margin-bottom: 1rem; display: flex; align-items: flex-start; gap: 0.75rem;">
+                            <i class="fas fa-check" style="color: var(--success-color); margin-top: 0.25rem;"></i>
+                            <span style="color: var(--text-secondary); font-size: 0.875rem;">
+                                <strong
+                                    style="color: var(--text-primary); display: block; margin-bottom: 0.25rem;">Advanced
+                                    Analytics</strong>
+                                Gain insights into documentation usage and user behavior.
+                            </span>
+                        </li>
+                        <li style="display: flex; align-items: flex-start; gap: 0.75rem;">
+                            <i class="fas fa-check" style="color: var(--success-color); margin-top: 0.25rem;"></i>
+                            <span style="color: var(--text-secondary); font-size: 0.875rem;">
+                                <strong
+                                    style="color: var(--text-primary); display: block; margin-bottom: 0.25rem;">Dedicated
+                                    Support</strong>
+                                Access to priority technical support and consultation.
+                            </span>
+                        </li>
+                    </ul>
+                    <button class="btn btn-primary">Contact Enterprise Sales</button>
+                </div>
+                <div style="flex: 1; min-width: 300px;">
+                    <div class="card" style="overflow: visible; border: none; background: none;">
+                        <div
+                            style="background-color: var(--card-bg); border-radius: 0.625rem; box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2); padding: 2rem; position: relative;">
+                            <div
+                                style="position: absolute; top: -15px; right: -15px; background: linear-gradient(45deg, var(--primary-color), var(--accent-color)); padding: 0.5rem 1rem; border-radius: 0.375rem; font-size: 0.75rem; font-weight: 600; color: white;">
+                                TRUSTED BY INDUSTRY LEADERS
+                            </div>
+                            <div
+                                style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; align-items: center; justify-items: center;">
+                                <div style="opacity: 0.7; transition: var(--transition);">
+                                    <i class="fab fa-microsoft"
+                                        style="font-size: 2.5rem; color: var(--text-secondary);"></i>
+                                </div>
+                                <div style="opacity: 0.7; transition: var(--transition);">
+                                    <i class="fab fa-amazon"
+                                        style="font-size: 2.5rem; color: var(--text-secondary);"></i>
+                                </div>
+                                <div style="opacity: 0.7; transition: var(--transition);">
+                                    <i class="fab fa-google"
+                                        style="font-size: 2.5rem; color: var(--text-secondary);"></i>
+                                </div>
+                                <div style="opacity: 0.7; transition: var(--transition);">
+                                    <i class="fab fa-slack"
+                                        style="font-size: 2.5rem; color: var(--text-secondary);"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Latest Tutorials Section -->
+    <section style="padding: 4rem 0;">
+        <div class="container">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem;">
+                <h2 class="section-title">Latest Tutorials</h2>
+                <a href="#"
+                    style="font-weight: 500; font-size: 0.875rem; display: flex; align-items: center; gap: 0.5rem;">
+                    Browse All Tutorials <i class="fas fa-arrow-right" style="font-size: 0.75rem;"></i>
+                </a>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem;">
+                <!-- Tutorial Item 1 -->
+                <div class="card" style="display: flex; flex-direction: column; height: 100%;">
+                    <div style="padding: 1.5rem; flex-grow: 1;">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <span class="badge badge-primary">Advanced</span>
+                            <span style="color: var(--text-secondary); font-size: 0.75rem;">
+                                <i class="fas fa-clock"></i> 45 min read
+                            </span>
+                        </div>
+                        <h3 style="font-size: 1.125rem; margin-bottom: 1rem; font-weight: 600; line-height: 1.4;">
+                            Building Scalable APIs with Django REST Framework</h3>
+                        <p
+                            style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 0.875rem; line-height: 1.6;">
+                            Learn how to create robust, scalable APIs using Django REST Framework with authentication,
+                            pagination, and filtering.
+                        </p>
+                    </div>
+                    <div
+                        style="padding: 1rem 1.5rem; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
+                        <div style="display: flex; align-items: center; gap: 0.75rem;">
+                            <div
+                                style="width: 2rem; height: 2rem; border-radius: 50%; background-color: var(--primary-color); display: flex; align-items: center; justify-content: center; font-size: 0.875rem; color: white; font-weight: 600;">
+                                JD</div>
+                            <div>
+                                <div style="font-size: 0.875rem; font-weight: 500;">John Doe</div>
+                                <div style="font-size: 0.75rem; color: var(--text-secondary);">Senior Developer</div>
+                            </div>
+                        </div>
+                        <a href="#" style="color: var(--accent-color); font-size: 0.875rem; font-weight: 500;">Read</a>
+                    </div>
+                </div>
+
+                <!-- Tutorial Item 2 -->
+                <div class="card" style="display: flex; flex-direction: column; height: 100%;">
+                    <div style="padding: 1.5rem; flex-grow: 1;">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <span class="badge badge-info">Intermediate</span>
+                            <span style="color: var(--text-secondary); font-size: 0.75rem;">
+                                <i class="fas fa-clock"></i> 30 min read
+                            </span>
+                        </div>
+                        <h3 style="font-size: 1.125rem; margin-bottom: 1rem; font-weight: 600; line-height: 1.4;">
+                            Optimizing Database Performance in Production</h3>
+                        <p
+                            style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 0.875rem; line-height: 1.6;">
+                            Discover techniques for optimizing database queries, indexing strategies, and connection
+                            pooling for high-traffic applications.
+                        </p>
+                    </div>
+                    <div
+                        style="padding: 1rem 1.5rem; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
+                        <div style="display: flex; align-items: center; gap: 0.75rem;">
+                            <div
+                                style="width: 2rem; height: 2rem; border-radius: 50%; background-color: var(--secondary-color); display: flex; align-items: center; justify-content: center; font-size: 0.875rem; color: white; font-weight: 600;">
+                                AS</div>
+                            <div>
+                                <div style="font-size: 0.875rem; font-weight: 500;">Alice Smith</div>
+                                <div style="font-size: 0.75rem; color: var(--text-secondary);">Database Architect</div>
+                            </div>
+                        </div>
+                        <a href="#" style="color: var(--accent-color); font-size: 0.875rem; font-weight: 500;">Read</a>
+                    </div>
+                </div>
+
+                <!-- Tutorial Item 3 -->
+                <div class="card" style="display: flex; flex-direction: column; height: 100%;">
+                    <div style="padding: 1.5rem; flex-grow: 1;">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <span class="badge badge-success">Beginner</span>
+                            <span style="color: var(--text-secondary); font-size: 0.75rem;">
+                                <i class="fas fa-clock"></i> 20 min read
+                            </span>
+                        </div>
+                        <h3 style="font-size: 1.125rem; margin-bottom: 1rem; font-weight: 600; line-height: 1.4;">
+                            Getting Started with Docker for Development</h3>
+                        <p
+                            style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 0.875rem; line-height: 1.6;">
+                            Learn how to set up Docker for local development environments, making it easy to manage
+                            dependencies and configurations.
+                        </p>
+                    </div>
+                    <div
+                        style="padding: 1rem 1.5rem; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
+                        <div style="display: flex; align-items: center; gap: 0.75rem;">
+                            <div
+                                style="width: 2rem; height: 2rem; border-radius: 50%; background-color: var(--accent-color); display: flex; align-items: center; justify-content: center; font-size: 0.875rem; color: white; font-weight: 600;">
+                                RJ</div>
+                            <div>
+                                <div style="font-size: 0.875rem; font-weight: 500;">Robert Johnson</div>
+                                <div style="font-size: 0.75rem; color: var(--text-secondary);">DevOps Engineer</div>
+                            </div>
+                        </div>
+                        <a href="#" style="color: var(--accent-color); font-size: 0.875rem; font-weight: 500;">Read</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section style="padding: 4rem 0; background-color: var(--darker-bg);">
+        <div class="container">
+            <h2 class="section-title" style="text-align: center; margin-bottom: 3rem;">What Developers Say</h2>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 2rem;">
+                <!-- Testimonial 1 -->
+                <div class="card" style="padding: 2rem; position: relative;">
+                    <div
+                        style="position: absolute; top: -1rem; left: 2rem; font-size: 3rem; color: var(--primary-color); opacity: 0.2;">
+                        <i class="fas fa-quote-left"></i>
+                    </div>
+                    <p
+                        style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 0.9375rem; line-height: 1.6; position: relative; z-index: 1;">
+                        "The documentation on TechDocs has been instrumental in helping our team stay up-to-date with
+                        the latest technologies. The structured approach and in-depth explanations save us countless
+                        hours of research."
+                    </p>
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div
+                            style="width: 3rem; height: 3rem; border-radius: 50%; background-color: var(--primary-color); display: flex; align-items: center; justify-content: center; font-size: 1.25rem; color: white; font-weight: 600;">
+                            MJ</div>
+                        <div>
+                            <div style="font-size: 1rem; font-weight: 600;">Mark Johnson</div>
+                            <div style="font-size: 0.75rem; color: var(--text-secondary);">CTO at TechStart</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="card" style="padding: 2rem; position: relative;">
+                    <div
+                        style="position: absolute; top: -1rem; left: 2rem; font-size: 3rem; color: var(--accent-color); opacity: 0.2;">
+                        <i class="fas fa-quote-left"></i>
+                    </div>
+                    <p
+                        style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 0.9375rem; line-height: 1.6; position: relative; z-index: 1;">
+                        "As a developer advocate, I need reliable resources to recommend to our community. TechDocs
+                        provides comprehensive, well-structured content that's perfect for developers at all skill
+                        levels."
+                    </p>
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div
+                            style="width: 3rem; height: 3rem; border-radius: 50%; background-color: var(--secondary-color); display: flex; align-items: center; justify-content: center; font-size: 1.25rem; color: white; font-weight: 600;">
+                            SP</div>
+                        <div>
+                            <div style="font-size: 1rem; font-weight: 600;">Sarah Parker</div>
+                            <div style="font-size: 0.75rem; color: var(--text-secondary);">Developer Advocate at
+                                CloudSys</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="card" style="padding: 2rem; position: relative;">
+                    <div
+                        style="position: absolute; top: -1rem; left: 2rem; font-size: 3rem; color: var(--info-color); opacity: 0.2;">
+                        <i class="fas fa-quote-left"></i>
+                    </div>
+                    <p
+                        style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 0.9375rem; line-height: 1.6; position: relative; z-index: 1;">
+                        "The enterprise documentation solution has transformed how our engineering teams collaborate.
+                        The customization options and integration capabilities exceeded our expectations."
+                    </p>
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div
+                            style="width: 3rem; height: 3rem; border-radius: 50%; background-color: var(--success-color); display: flex; align-items: center; justify-content: center; font-size: 1.25rem; color: white; font-weight: 600;">
+                            DK</div>
+                        <div>
+                            <div style="font-size: 1rem; font-weight: 600;">David Kim</div>
+                            <div style="font-size: 0.75rem; color: var(--text-secondary);">Engineering Director at
+                                EnterCloud</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section style="padding: 4rem 0;">
+        <div class="container">
+            <div class="card"
+                style="max-width: 800px; margin: 0 auto; padding: 3rem; background: linear-gradient(135deg, rgba(67, 97, 238, 0.1), rgba(76, 201, 240, 0.1));">
+                <div style="text-align: center; margin-bottom: 2.5rem;">
+                    <h2 style="font-size: 1.75rem; margin-bottom: 1rem; font-weight: 700;">Stay Updated with the Latest
+                        Documentation</h2>
+                    <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto; font-size: 0.9375rem;">
+                        Subscribe to our newsletter and receive weekly updates on new documentation, tutorials, and best
+                        practices.
+                    </p>
+                </div>
+                <div style="display: flex; gap: 0.75rem; max-width: 500px; margin: 0 auto;">
+                    <input type="email" placeholder="Enter your email address"
+                        style="flex: 1; padding: 0.875rem 1.25rem; border-radius: 0.375rem; border: 1px solid var(--border-color); background-color: var(--dark-bg); color: var(--text-primary); outline: none;">
+                    <button class="btn btn-primary">
+                        Subscribe
+                    </button>
+                </div>
+                <p style="text-align: center; font-size: 0.75rem; color: var(--text-secondary); margin-top: 1rem;">
+                    By subscribing, you agree to our <a href="#" style="text-decoration: underline;">Privacy Policy</a>.
+                    You can unsubscribe at any time.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section style="padding: 4rem 0; background-color: var(--darker-bg);">
+        <div class="container">
+            <h2 class="section-title" style="text-align: center; margin-bottom: 3rem;">Frequently Asked Questions</h2>
+
+            <div style="max-width: 800px; margin: 0 auto;">
+                <!-- FAQ Item 1 -->
+                <div class="card" style="padding: 1.5rem; margin-bottom: 1rem; transition: var(--transition);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
+                        <h3 style="font-size: 1.125rem; font-weight: 600;">How often is the documentation updated?</h3>
+                        <i class="fas fa-chevron-down" style="color: var(--accent-color); font-size: 0.875rem;"></i>
+                    </div>
+                    <div
+                        style="margin-top: 1rem; color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; padding-top: 1rem; border-top: 1px solid var(--border-color);">
+                        <p>
+                            Our documentation is updated continuously. Major updates occur monthly with new features and
+                            improvements, while minor updates and corrections happen weekly. Each document displays its
+                            last update timestamp, allowing you to track the most recent changes.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="card" style="padding: 1.5rem; margin-bottom: 1rem; transition: var(--transition);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
+                        <h3 style="font-size: 1.125rem; font-weight: 600;">Can I contribute to the documentation?</h3>
+                        <i class="fas fa-chevron-down" style="color: var(--accent-color); font-size: 0.875rem;"></i>
+                    </div>
+                    <div
+                        style="margin-top: 1rem; color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; padding-top: 1rem; border-top: 1px solid var(--border-color);">
+                        <p>
+                            Yes, we welcome community contributions! You can suggest edits, report issues, or submit new
+                            content through our GitHub repository. All contributions are reviewed by our documentation
+                            team before being published to ensure accuracy and consistency.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="card" style="padding: 1.5rem; margin-bottom: 1rem; transition: var(--transition);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
+                        <h3 style="font-size: 1.125rem; font-weight: 600;">Is there a difference between free and paid
+                            documentation?</h3>
+                        <i class="fas fa-chevron-down" style="color: var(--accent-color); font-size: 0.875rem;"></i>
+                    </div>
+                    <div
+                        style="margin-top: 1rem; color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; padding-top: 1rem; border-top: 1px solid var(--border-color);">
+                        <p>
+                            All our core documentation is freely available to everyone. Premium documentation includes
+                            advanced topics, in-depth case studies, and specialized enterprise solutions. Enterprise
+                            customers also receive customized documentation, private knowledge bases, and priority
+                            support.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div class="card" style="padding: 1.5rem; transition: var(--transition);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
+                        <h3 style="font-size: 1.125rem; font-weight: 600;">How do I request documentation for a specific
+                            topic?</h3>
+                        <i class="fas fa-chevron-down" style="color: var(--accent-color); font-size: 0.875rem;"></i>
+                    </div>
+                    <div
+                        style="margin-top: 1rem; color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; padding-top: 1rem; border-top: 1px solid var(--border-color);">
+                        <p>
+                            You can request documentation on specific topics through our GitHub issues or community
+                            forum. Our team reviews all requests and prioritizes them based on community interest and
+                            strategic importance. You can also participate in our quarterly documentation planning
+                            sessions.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer
+        style="background-color: var(--dark-bg); padding: 4rem 0 1.5rem; border-top: 1px solid var(--border-color);">
+        <div class="container">
+            <div
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; margin-bottom: 3rem;">
+                <!-- Footer Column 1 -->
+                <div>
+                    <div class="logo" style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+                        <span style="font-size: 1.5rem; margin-right: 0.625rem;">
+                            <i class="fas fa-book" style="color: var(--primary-color);"></i>
+                        </span>
+                        <h3 style="font-size: 1.5rem; font-weight: 700;">Tech<span class="gradient-text">Docs</span>
+                        </h3>
+                    </div>
+                    <p
+                        style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 0.875rem; line-height: 1.6;">
+                        Professional documentation for developers, by developers. Making technical knowledge accessible
+                        and actionable.
+                    </p>
+                    <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem;">
+                        <a href="#"
+                            style="color: var(--text-secondary); font-size: 1.25rem; transition: var(--transition);"><i
+                                class="fab fa-github"></i></a>
+                        <a href="#"
+                            style="color: var(--text-secondary); font-size: 1.25rem; transition: var(--transition);"><i
+                                class="fab fa-twitter"></i></a>
+                        <a href="#"
+                            style="color: var(--text-secondary); font-size: 1.25rem; transition: var(--transition);"><i
+                                class="fab fa-linkedin"></i></a>
+                        <a href="#"
+                            style="color: var(--text-secondary); font-size: 1.25rem; transition: var(--transition);"><i
+                                class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <!-- Footer Column 2 -->
+                <div>
+                    <h4 style="font-size: 1rem; margin-bottom: 1.25rem; color: var(--text-primary); font-weight: 600;">
+                        Documentation</h4>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.75rem;"><a href="#"
+                                style="color: var(--text-secondary); font-size: 0.875rem;">Python</a></li>
+                        <li style="margin-bottom: 0.75rem;"><a href="#"
+                                style="color: var(--text-secondary); font-size: 0.875rem;">JavaScript</a></li>
+                        <li style="margin-bottom: 0.75rem;"><a href="#"
+                                style="color: var(--text-secondary); font-size: 0.875rem;">Web Development</a></li>
+                        <li style="margin-bottom: 0.75rem;"><a href="#"
+                                style="color: var(--text-secondary); font-size: 0.875rem;">Data Science</a></li>
+                        <li style="margin-bottom: 0.75rem;"><a href="#"
+                                style="color: var(--text-secondary); font-size: 0.875rem;">DevOps</a></li>
+                        <li style="margin-bottom: 0.75rem;"><a href="#"
+                                style="color: var(--text-secondary); font-size: 0.875rem;">Mobile Development</a></li>
+                    </ul>
+                </div>
+
+                <!-- Footer Column 3 -->
+                <div>
+                    <h4 style="font-size: 1rem; margin-bottom: 1.25rem; color: var(--text-primary); font-weight: 600;">
+                        Resources</h4>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.75rem;"><a href="#"
+                                style="color: var(--text-secondary); font-size: 0.875rem;">Tutorials</a></li>
+                        <li style="margin-bottom: 0.75rem;"><a href="#"
+                                style="color: var(--text-secondary); font-size: 0.875rem;">API References</a></li>
+                        <li style="margin-bottom: 0.75rem;"><a href="#"
+                                style="color: var(--text-secondary); font-size: 0.875rem;">Guides</a></li>
+                        <li style="margin-bottom: 0.75rem;"><a href="#"
+                                style="color: var(--text-secondary); font-size: 0.875rem;">Templates</a></li>
+                        <li style="margin-bottom: 0.75rem;"><a href="#"
+                                style="color: var(--text-secondary); font-size: 0.875rem;">Examples</a></li>
+                        <li style="margin-bottom: 0.75rem;"><a href="#"
+                                style="color: var(--text-secondary); font-size: 0.875rem;">Cheat Sheets</a></li>
+                    </ul>
+                </div>
+
+                <!-- Footer Column 4 -->
+                <div>
+                    <h4 style="font-size: 1rem; margin-bottom: 1.25rem; color: var(--text-primary); font-weight: 600;">
+                        Company</h4>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.75rem;"><a href="#"
+                                style="color: var(--text-secondary); font-size: 0.875rem;">About</a></li>
+                        <li style="margin-bottom: 0.75rem;"><a href="#"
+                                style="color: var(--text-secondary); font-size: 0.875rem;">Blog</a></li>
+                        <li style="margin-bottom: 0.75rem;"><a href="#"
+                                style="color: var(--text-secondary); font-size: 0.875rem;">Careers</a></li>
+                        <li style="margin-bottom: 0.75rem;"><a href="#"
+                                style="color: var(--text-secondary); font-size: 0.875rem;">Press Kit</a></li>
+                        <li style="margin-bottom: 0.75rem;"><a href="#"
+                                style="color: var(--text-secondary); font-size: 0.875rem;">Contact</a></li>
+                        <li style="margin-bottom: 0.75rem;"><a href="#"
+                                style="color: var(--text-secondary); font-size: 0.875rem;">Legal</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div
+                style="border-top: 1px solid var(--border-color); padding-top: 1.5rem; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem;">
+                <p style="color: var(--text-secondary); font-size: 0.75rem;">
+                    © 2025 TechDocs. All rights reserved.
+                </p>
+                <div style="display: flex; gap: 1.5rem;">
+                    <a href="#" style="color: var(--text-secondary); font-size: 0.75rem;">Privacy Policy</a>
+                    <a href="#" style="color: var(--text-secondary); font-size: 0.75rem;">Terms of Service</a>
+                    <a href="#" style="color: var(--text-secondary); font-size: 0.75rem;">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#"
+        style="position: fixed; bottom: 2rem; right: 2rem; width: 3rem; height: 3rem; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); z-index: 99; transition: var(--transition);">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+</body>
+
+</html>
